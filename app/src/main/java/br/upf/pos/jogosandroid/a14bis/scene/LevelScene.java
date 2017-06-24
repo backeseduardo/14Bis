@@ -17,14 +17,12 @@ import java.util.List;
 
 import br.upf.pos.jogosandroid.a14bis.R;
 import br.upf.pos.jogosandroid.a14bis.delegate.AmmunitionDelegate;
-import br.upf.pos.jogosandroid.a14bis.delegate.ButtonDelegate;
 import br.upf.pos.jogosandroid.a14bis.delegate.GunChooseDelegate;
 import br.upf.pos.jogosandroid.a14bis.delegate.HUDDelegate;
 import br.upf.pos.jogosandroid.a14bis.delegate.MeteorDelegate;
 import br.upf.pos.jogosandroid.a14bis.delegate.PauseDelegate;
 import br.upf.pos.jogosandroid.a14bis.delegate.ShootDelegate;
 import br.upf.pos.jogosandroid.a14bis.layer.AmmunitionEngine;
-import br.upf.pos.jogosandroid.a14bis.layer.Button;
 import br.upf.pos.jogosandroid.a14bis.layer.HUD;
 import br.upf.pos.jogosandroid.a14bis.layer.MeteorsEngine;
 import br.upf.pos.jogosandroid.a14bis.layer.PauseScreen;
@@ -44,7 +42,7 @@ import static br.upf.pos.jogosandroid.a14bis.util.DeviceSettings.screenWidth;
  * Created by backes on 6/11/17.
  */
 
-public class LevelOne extends CCScene
+public class LevelScene extends CCScene
         implements HUDDelegate, MeteorDelegate, ShootDelegate, PauseDelegate, AmmunitionDelegate, GunChooseDelegate {
 
     public final String TAG = "MenuScene";
@@ -70,7 +68,7 @@ public class LevelOne extends CCScene
 
     private Vibrator vibrator;
 
-    public LevelOne() {
+    public LevelScene() {
         GameStatus.getInstance().setScore(0);
 
         createBackground();
@@ -208,7 +206,7 @@ public class LevelOne extends CCScene
 
     private boolean checkRadiusHitsOfArray(List<? extends CCSprite> array1,
                                            List<? extends CCSprite> array2,
-                                           LevelOne levelOne,
+                                           LevelScene levelScene,
                                            String hit) {
         boolean result = false;
         for (int i = 0; i < array1.size(); i++) {
@@ -223,8 +221,8 @@ public class LevelOne extends CCScene
 
                     Method method;
                     try {
-                        method = LevelOne.class.getMethod(hit, CCSprite.class, CCSprite.class);
-                        method.invoke(levelOne, array1.get(i), array2.get(j));
+                        method = LevelScene.class.getMethod(hit, CCSprite.class, CCSprite.class);
+                        method.invoke(levelScene, array1.get(i), array2.get(j));
                     } catch (SecurityException e1) {
                         e1.printStackTrace();
                     } catch (NoSuchMethodException e1) {
@@ -248,12 +246,6 @@ public class LevelOne extends CCScene
 
         if (((Meteor) meteor).exploded()) {
             hud.increaseScore(((Meteor) meteor).getLevel());
-
-//            if (hud.getScore() > 2) {
-//                CCDirector.sharedDirector().replaceScene(
-//                        CCFadeTransition.transition(1.0f, new LevelTwo())
-//                );
-//            }
         }
     }
 

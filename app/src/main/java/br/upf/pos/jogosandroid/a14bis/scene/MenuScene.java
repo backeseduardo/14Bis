@@ -1,16 +1,10 @@
 package br.upf.pos.jogosandroid.a14bis.scene;
 
-import android.util.Log;
-
-import org.cocos2d.layers.CCLayer;
 import org.cocos2d.layers.CCScene;
 import org.cocos2d.nodes.CCDirector;
 import org.cocos2d.nodes.CCSprite;
-import org.cocos2d.sound.SoundEngine;
 import org.cocos2d.transitions.CCFadeTransition;
-import org.cocos2d.types.CGPoint;
 
-import br.upf.pos.jogosandroid.a14bis.R;
 import br.upf.pos.jogosandroid.a14bis.delegate.ButtonDelegate;
 import br.upf.pos.jogosandroid.a14bis.layer.Button;
 import br.upf.pos.jogosandroid.a14bis.util.Assets;
@@ -115,7 +109,7 @@ public class MenuScene extends CCScene implements ButtonDelegate {
     public void buttonPress(Button button) {
         if (button.equals(btnPlay)) {
             CCDirector.sharedDirector().replaceScene(
-                    CCFadeTransition.transition(1.0f, new LevelOne())
+                    CCFadeTransition.transition(1.0f, new LevelScene())
             );
         } else if (button.equals(btnHighScore)) {
             CCDirector.sharedDirector().replaceScene(
